@@ -50,11 +50,12 @@ def run():
     grid, width, height = parseGrid(read_data)
 
     visible_trees = 0
-    for y in range(len(grid)):
+    for y in range(1,len(grid)-1):
         line = grid[y]
-        for x in range(len(line)):
+        for x in range(1,len(line)-1):
             if(isVisible(grid[y][x], [x,y], grid)):
                 visible_trees =  visible_trees+1
+                #print(grid[y][x])
     visible_trees = visible_trees + len(grid)*4-4
     print(visible_trees)
 
