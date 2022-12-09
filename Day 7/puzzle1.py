@@ -29,7 +29,13 @@ class Node:
             s = s + d.size()
         return s
 
-  
+    def getRecurseSubDir(self):
+        dir=[]
+        for d in self.children:
+            dir.append(d)
+            dir.extend(d.getRecurseSubDir())
+        return dir
+
 def build(read_data):
     root = Node("", None)
     node = root
@@ -58,13 +64,26 @@ def build(read_data):
             else:
                 node.files.append([tokens[0], tokens[1]])
     
-    directories = []
-    
+    return root
+
+def findDirectoriesUnder100k(root):
+    dirs = []
+    size = 0
+    for d in root.getRecurseSubDir():
+        if d.size() < 100000:
+            dirs.append([d,d.size()])
+            size = size + d.size()
+    return dirs, size
+
+
 
 def run():
     with open('input') as f:
         read_data = f.readlines()
-    build(read_data)
+    root = build(read_data)
+    dirs, size = findDirectoriesUnder100k(root)
+    print(dirs)
+    print(size)
 
 if __name__ == '__main__':
   run()
