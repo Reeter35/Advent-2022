@@ -2,7 +2,7 @@
 
 
 def run():
-    with open('input') as f:
+    with open('example') as f:
         read_data = f.readlines()
         
     H=[0,0]
@@ -55,10 +55,11 @@ def run():
                     T = tuple([x,y])
                     tail_positions.append(T)
         
-        #print(H,T)
+        print(H, T,tail_positions)
     
     # remove duplicates
     res = []
+    print(len(tail_positions))
     [res.append(x) for x in tail_positions if x not in res]
     print(len(res))
 
